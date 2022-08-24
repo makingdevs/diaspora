@@ -4,8 +4,13 @@ import org.junit.Test
 
 class NetworkTest {
 
+  def network = Network.instance
+
   @Test
-  void someTest(){
-    assert false
+  void commonFollorwersTest(){
+    def user1Followers = ["user2", "user3", "user4"]
+    def user2Followers = ["user3", "user4", "user5"]
+
+    assert ["user3", "user4"] == network.commonFollowers(user1Followers, user2Followers)
   }
 }
