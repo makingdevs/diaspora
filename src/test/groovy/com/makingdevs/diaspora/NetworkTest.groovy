@@ -13,4 +13,21 @@ class NetworkTest {
 
     assert ["user3", "user4"] == network.commonFollowers(user1Followers, user2Followers)
   }
+
+  @Test
+  void followingUsersTest(){
+
+    def user3Followers = [user3: ["user8", "user5", "user6"]]
+    def user4Followers = [user4: ["user6", "user5", "user8"]]
+    def user5Followers = [user5: ["user3", "user7", "user4"]]
+
+    def grid = [user3Followers, user4Followers, user5Followers]
+
+    assert [
+      user3: ["user5"],
+      user4: ["user5"],
+      user5: ["user3", "user4"]
+    ] == network.gridOfUsersAndFollowers(grid)
+
+  }
 }
