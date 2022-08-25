@@ -30,4 +30,23 @@ class NetworkTest {
     ] == network.gridOfUsersAndFollowers(grid)
 
   }
+
+  @Test
+  void graphvizTest(){
+    def user1Followers = [user1: ["user2", "user3", "user4"]]
+    def user2Followers = [user2: ["user3", "user4", "user5"]]
+
+    def user3Followers = [user3: ["user8", "user5", "user6"]]
+    def user4Followers = [user4: ["user6", "user5", "user8"]]
+    def user5Followers = [user5: ["user3", "user7", "user4"]]
+
+    def grid = [user3Followers, user4Followers, user5Followers]
+
+    def graphCommonFollowers = network.graphvizForFollowers(user1Followers, user2Followers)
+    def graph = network.gridOfUsersAndFollowers(grid)
+    println graphCommonFollowers
+    println "-----"
+    println network.graphvizForFollowersOfFollowers(graph)
+
+  }
 }
