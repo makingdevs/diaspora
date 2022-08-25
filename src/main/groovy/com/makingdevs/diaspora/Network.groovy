@@ -10,14 +10,20 @@ class Network {
   def gridOfUsersAndFollowers(gridOfUsers) {
     def allUsers = gridOfUsers.collect { e -> e.collect { k, v  -> k} }.flatten()
 
-    allUsers.collect { user ->
-      gridOfUsers.collect { userAndFollowers ->
+    Map grid = [:]
+
+    allUsers.each { user ->
+
+      def followers = gridOfUsers.collect { userAndFollowers ->
         userAndFollowers.find { thisUser, followers ->
           followers.any { follower -> follower == user}
         }
       }.findAll { it }.collect { entries ->
-        entries.collect { entry -> entry.key }
+        entries*.key
       }.flatten()
+
+      grid.put(user, followers)
     }
+    grid
   }
 }
