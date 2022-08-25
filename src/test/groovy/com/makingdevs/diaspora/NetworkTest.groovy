@@ -44,9 +44,7 @@ class NetworkTest {
 
     def graphCommonFollowers = network.graphvizForFollowers(user1Followers, user2Followers)
     def graph = network.gridOfUsersAndFollowers(grid)
-    println graphCommonFollowers
-    println "-----"
-    println network.graphvizForFollowersOfFollowers(graph)
-
+    assert "user1 -> user3;\nuser2 -> user3;\nuser1 -> user4;\nuser2 -> user4;".trim() == graphCommonFollowers.trim()
+    assert "user3 -> user5;\nuser4 -> user5;\nuser5 -> user3;\nuser5 -> user4;".trim() ==  network.graphvizForFollowersOfFollowers(graph).trim()
   }
 }
