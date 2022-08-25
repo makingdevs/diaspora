@@ -4,7 +4,9 @@ package com.makingdevs.diaspora
 class Network {
 
   List commonFollowers(followersForUser1, followersForUser2) {
-    followersForUser1 - (followersForUser1 - followersForUser2)
+    def followersFor1 = followersForUser1.values().flatten()
+    def followersFor2 = followersForUser2.values().flatten()
+    followersFor1 - (followersFor1 - followersFor2)
   }
 
   def gridOfUsersAndFollowers(gridOfUsers) {
