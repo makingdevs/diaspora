@@ -30,9 +30,11 @@ class Network {
   }
 
   def graphvizForFollowers(followersForUser1, followersForUser2) {
+    def user1 = followersForUser1.keySet().flatten().first()
+    def user2 = followersForUser2.keySet().flatten().first()
     def commonFollowers = commonFollowers(followersForUser1, followersForUser2)
     commonFollowers.collect { follower ->
-        "user1 -> ${follower};\nuser2 -> ${follower}"
+        "${user1} -> ${follower};\n${user2} -> ${follower};"
     }.join("\n")
   }
 
