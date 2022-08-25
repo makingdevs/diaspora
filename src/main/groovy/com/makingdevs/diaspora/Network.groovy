@@ -28,4 +28,19 @@ class Network {
     }
     grid
   }
+
+  def graphvizForFollowers(followersForUser1, followersForUser2) {
+    def commonFollowers = commonFollowers(followersForUser1, followersForUser2)
+    commonFollowers.collect { follower ->
+        "user1 -> ${follower};\nuser2 -> ${follower}"
+    }.join("\n")
+  }
+
+  def graphvizForFollowersOfFollowers(Map gridOfUsers) {
+    gridOfUsers.collect { user, followers ->
+      followers.collect { follower ->
+        "${user} -> ${follower};"
+      }.join("\n")
+    }.join("\n")
+  }
 }
