@@ -3,9 +3,9 @@ package com.makingdevs.diaspora
 @Singleton
 class Network {
 
-  List commonFollowers(followersForUser1, followersForUser2) {
-    def followersFor1 = followersForUser1.values().flatten()
-    def followersFor2 = followersForUser2.values().flatten()
+  List commonFollowersFor(user1, user2) {
+    def followersFor1 = user1.values().flatten()
+    def followersFor2 = user2.values().flatten()
     followersFor1 - (followersFor1 - followersFor2)
   }
 
@@ -29,12 +29,12 @@ class Network {
     grid
   }
 
-  def graphvizForFollowers(followersForUser1, followersForUser2) {
-    def user1 = followersForUser1.keySet().flatten().first()
-    def user2 = followersForUser2.keySet().flatten().first()
-    def commonFollowers = commonFollowers(followersForUser1, followersForUser2)
-    commonFollowers.collect { follower ->
-        "${user1} -> ${follower};\n${user2} -> ${follower};"
+  def graphvizForFollowers(user1, user2) {
+    def username1 = user1.keySet().flatten().first()
+    def username2 = user2.keySet().flatten().first()
+    def commonFollowersFor = commonFollowersFor(user1, user2)
+    commonFollowersFor.collect { follower ->
+        "${username1} -> ${follower};\n${username2} -> ${follower};"
     }.join("\n")
   }
 
