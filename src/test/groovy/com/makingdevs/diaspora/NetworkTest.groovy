@@ -17,9 +17,9 @@ class NetworkTest {
   @Test
   void followingUsersTest(){
 
-    def user3 = ["3rickDJ": ["user8", "graemerocher", "josevalim"]]
-    def user4 = [glaforge: ["josevalim", "graemerocher", "johnmccarthy"]]
-    def user5 = [graemerocher: ["3rickDJ", "matsumoto", "glaforge"]]
+    def user3 = new User(username: "3rickDJ", followers: [new User(username: "saraly92"), new User(username: "graemerocher"), new User(username: "josevalim"))
+    def user4 = new User(username: "glaforge", followers: [new User(username: "josevalim"), new User(username: "graemerocher"), new User(username: "johnmccarthy")])
+    def user5 = new User(username: "graemerocher", followers: [new User(username: "3rickDJ"), new User(username: "matsumoto"), new User(username: "glaforge")])
 
     def grid = [user3, user4, user5]
 
