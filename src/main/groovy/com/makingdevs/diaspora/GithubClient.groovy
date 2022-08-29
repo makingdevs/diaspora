@@ -9,27 +9,29 @@ class GithubClient {
   String API_KEY = System.getenv("GITHUB_API_KEY")
   Integer pageSize = 100
 
-  Map getUser(String username) {
+  User getUser(String username) {
     RESTClient client = new RESTClient(urlBase)
     def response = client.get(path:"/users/$username", headers: ["Authorization" : "token $API_KEY"])
     assert 200 == response.statusCode
-    response.json
+    new User(id: response.json.id, username: response.json.login, followersSize: response.json.followers)
   }
 
-  List getFollowersForUser(Map user) {
+  List getFollowersForUser(User user) {
 
-    Integer pages = (user.followers / pageSize).toInteger() + (user.followers % pageSize ? 1 : 0 )
+    Integer pages = (user.followersSize / pageSize).toInteger() + (user.followersSize % pageSize ? 1 : 0 )
 
     RESTClient client = new RESTClient(urlBase)
     List followers = []
     (1..pages).step(1) { page ->
       def response = client.get(
-        path:"/users/${user.login}/followers",
+        path:"/users/${user.username}/followers",
         headers: ["Authorization" : "token $API_KEY"],
         query: ["per_page": pageSize, page: page])
       assert 200 == response.statusCode
 
-      followers << response.json
+      followers += response.json.collect { doc ->
+        new User(id: doc.id, username: doc.login, followersSize: doc.followers)
+      }
     }
     followers
   }
