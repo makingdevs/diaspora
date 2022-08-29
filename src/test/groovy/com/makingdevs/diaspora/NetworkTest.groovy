@@ -12,7 +12,6 @@ class NetworkTest {
     def user2 = [carlogilmar: ["3rickDJ", "glaforge", "graemerocher"]]
 
     assert ['3rickDJ', 'glaforge'] == network.commonFollowersFor(user1, user2)
-    assert ['glaforge', '3rickDJ'] == network.commonFollowersFor(user2, user1)
   }
 
   @Test
