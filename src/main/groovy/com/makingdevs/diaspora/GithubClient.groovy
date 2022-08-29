@@ -16,7 +16,7 @@ class GithubClient {
     new User(id: response.json.id, username: response.json.login, followersSize: response.json.followers)
   }
 
-  List getFollowersForUser(User user) {
+  User putFollowersToUser(User user) {
 
     Integer pages = (user.followersSize / pageSize).toInteger() + (user.followersSize % pageSize ? 1 : 0 )
 
@@ -33,6 +33,7 @@ class GithubClient {
         new User(id: doc.id, username: doc.login, followersSize: doc.followers)
       }
     }
-    followers
+    user.followers = followers
+    user
   }
 }
