@@ -3,7 +3,7 @@ package com.makingdevs.diaspora
 @Singleton
 class Network {
 
-  List commonFollowersFor(user1, user2) {
+  List commonFollowersFor(Map user1, Map user2) {
     def followersFor1 = user1.values().flatten()
     def followersFor2 = user2.values().flatten()
     followersFor1 - (followersFor1 - followersFor2)
