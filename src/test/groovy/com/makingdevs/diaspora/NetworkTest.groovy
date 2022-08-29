@@ -7,11 +7,11 @@ class NetworkTest {
   def network = Network.instance
 
   @Test
-  void commonFollorwersTest(){
-    def user1 = [neodevelop: ["makingdevs", "3rickDJ", "glaforge"]]
-    def user2 = [carlogilmar: ["3rickDJ", "glaforge", "graemerocher"]]
+  void commonFollowersTest(){
+    def user1 = new User(username: "neodevelop", followers: [new User(username: "makingdevs"), new User(username: "3rickDJ"), new User(username: "glaforge")])
+    def user2 = new User(username: "carlogilmar", followers: [new User(username: "3rickDJ"), new User(username: "glaforge"), new User(username: "graemerocher")])
 
-    assert ['3rickDJ', 'glaforge'] == network.commonFollowersFor(user1, user2)
+    assert ['3rickDJ', 'glaforge'] == network.commonFollowersFor(user1, user2)*.username
   }
 
   @Test
