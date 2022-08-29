@@ -12,10 +12,7 @@ class Network {
   def gridOfUsersAndFollowers(gridOfUsers) {
     def allUsers = gridOfUsers.collect { e -> e.collect { k, v  -> k} }.flatten()
 
-    Map grid = [:]
-
-    allUsers.each { user ->
-
+    allUsers.inject([:]) { acc, user ->
       def followers = gridOfUsers.collect { userAndFollowers ->
         userAndFollowers.find { thisUser, followers ->
           followers.any { follower -> follower == user}
@@ -24,9 +21,9 @@ class Network {
         entries*.key
       }.flatten()
 
-      grid.put(user, followers)
+      acc.put(user, followers)
+      acc
     }
-    grid
   }
 
   def graphvizForFollowers(user1, user2) {
